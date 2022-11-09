@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<head>
+    
+    <title>Receita5</title>
+    <style>
+        *{
+            text-align: center;
+        }
+        .btn{
+            margin: 7px;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="btn"><a id="CarregarBtnCervs">Carregar cervejas</a></div>
+    <div class="btn"><a id="CarregarBtnroupas">Carregar roupas</a></div>
+    <div class="btn"><a id="ordenarButton" style="opacity: 0;">Ordenar</a></div>
+    <div class="btn"><a id="desordenarBtn" style="opacity: 0;">Embaralhar</a></div>
+    
+    <div id="divOne"></div>
+</body>
+
+<script>
+    const cervejas = ["Guiness", "Desperados", "Becks", "Skol", "Heineken"];
+    const roupas = ["Saia", "Blusa", "Vestido", "Casaco", "Calça"];
+    let arrNow;
+    
+
+    let ordenarBtn = document.getElementById("ordenarButton");
+    let desordenarBtn = document.getElementById("desordenarBtn");
+    let btnCervs = document.getElementById("CarregarBtnCervs");
+    let btnroupas = document.getElementById("CarregarBtnroupas");
+
+    const CarregarDiv = (arr) => {
+        ordenarBtn.style.opacity = 1;
+        desordenarBtn.style.opacity = 1;
+        arrNow = arr;
+        const div = document.getElementById("divOne");
+        const cervejasHtml = arr.map(item => `<h1>${item}</h1>`);
+        div.innerHTML = `${cervejasHtml.join("\n")}`;
+    }
+
+    const ordenar = (arr) => {
+        arr.sort();
+    }
+
+    const desordenar = (arr) => {
+        arr.sort(()=> Math.random() - 0.5);
+    }
+
+    btnCervs.addEventListener("click", () => CarregarDiv(cervejas));
+    btnroupas.addEventListener("click", () => CarregarDiv(roupas));
+
+    ordenarBtn.addEventListener("click", () => {
+        ordenar(arrNow);
+        CarregarDiv(arrNow);
+        ordenarBtn.style.opacity = 0;
+    });
+
+    desordenarBtn.addEventListener("click", () => {
+        desordenar(arrNow);
+        CarregarDiv(arrNow);
+    });
+</script>
+</html>
